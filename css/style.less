@@ -1,0 +1,160 @@
+@BASE_FONT_SIZE: 72px;
+
+body {
+	background-color: black;
+	color: gray;
+}
+
+.transition( ... ) {
+	-webkit-transition: @arguments;
+	-moz-transition: @arguments;
+	-ms-transition: @arguments;
+	-o-transition: @arguments;
+	transition: @arguments;
+}
+
+.transform( ... ) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	-o-transform: @arguments;
+	transform: @arguments;
+}
+
+.transform-style( ... ) {
+	-webkit-transform-style: @arguments;
+	-moz-transform-style: @arguments;
+	-ms-transform-style: @arguments;
+	-o-transform-style: @arguments;
+	transform-style: @arguments;
+}
+
+.scaleFont( @factor ) {
+	@base: unit( @BASE_FONT_SIZE / @factor, px );
+	font-size: @base;
+	line-height: @base + 6;
+}
+
+.group( @width ) {
+	width: @width;
+	text-align: center;
+
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	.column( @columns, @borderWidth ) {
+		border-style: solid;
+		border-width: @borderWidth;
+		float: left;
+		width: @width / @columns - @borderWidth * 2;
+	}
+}
+
+.impress-not-supported {
+	#impress {
+		display: none;
+	}
+
+	.fallback-message {
+		width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+
+		img {
+			width: 128px;
+			height: 128px;
+		}
+
+		/* for IE */
+		a img {
+			border-width: 0;
+		}
+	}
+}
+
+.impress-supported {
+	.fallback-message {
+		display: none;
+	}
+}
+
+.impress-enabled {
+	.step {
+		font-size: @BASE_FONT_SIZE;
+		.transition( opacity 1s );
+
+		&:not( .active ) {
+			opacity: 0.3;
+		}
+
+		&.enhance:not( #overview ) {
+			.transition( background-color 1s );
+
+			background-color: white;
+			width: 800px;
+			height: 600px;
+		}
+
+		p {
+			width: 800px;
+		}
+
+		pre.snipet {
+			.small;
+			border-radius: 10px;
+		}
+
+		img {
+			max-width: 800px;
+			max-height: 600px;
+		}
+	}
+
+	.small {
+		.scaleFont( 2 );
+	}
+
+	.slide {
+		width: 800px;
+		text-align: center;
+	}
+
+	#title {
+		width: 800px;
+		text-align: center;
+
+		h1 {
+			font-size: @BASE_FONT_SIZE * 2;
+		}
+	}
+
+	#barrage {
+		div {
+			position: absolute;
+			float: left;
+			color: white;
+			opacity: 0.75;
+			font-size: @BASE_FONT_SIZE;
+			font-weight: bold;
+			white-space: nowrap;
+
+			&.hidden {
+				display: none;
+			}
+		}
+	}
+}
+
+
+/* NOTE: dirty hack for Webkit bug */
+.impress-enabled {
+	pointer-events: none;
+
+	#impress {
+		pointer-events: auto;
+	}
+}
