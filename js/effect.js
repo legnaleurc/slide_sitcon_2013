@@ -154,12 +154,12 @@
 			return Math.floor( Math.random() * ( u - l ) ) + l;
 		}
 
-		var length = gr( 1, 140 );
+		var length = gr( 1, 4 );
 		var a = new Array( length );
 		for( var i = 0; i < length; ++i ) {
-			a[i] = 'w';
+			a[i] = '( ´ ▽ ` )ﾉ&nbsp;☆彡';
 		}
-		return a.join( '' );
+		return a.join( '&nbsp;&nbsp;' );
 	}
 	window.setInterval( function() {
 		addComment( randomComment() );
