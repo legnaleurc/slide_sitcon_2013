@@ -1,3 +1,8 @@
+License
+-------
+
+This slide is using MIT and CC BY-SA 3.0 Unported.
+
 Note
 ----
 
