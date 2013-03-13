@@ -4,6 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=1024" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="stylesheet" type="text/css" href="css/twilight.css" />
 	<link rel="stylesheet/less" type="text/css" href="css/style.less" />
 </head>
 <body class="impress-not-supported">
@@ -19,16 +20,308 @@
 			<a href="http://www.apple.com/safari/" rel="external"><img src="img/safari.png" alt="Safari" /></a>
 		</p>
 	</div>
+	<div id="banner">
+		<img id="qrcode" src="img/qrcode.png" />
+		<a href="https://github.com/legnaleurc/slide_sitcon_2013" rel="external"><img id="github-link" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" /></a>
+	</div>
 	<div id="impress">
 		<div id="title" class="step" data-x="0" data-y="0">
 			<h1>Khopper</h1>
 			<span>an audio converter</span>
+		</div>
+		<div class="step" data-x="1000" data-y="0">
+			<h4><a href="http://about.me/legnaleurc" rel="external">About me</a></h4>
+			<p class="small">
+				<span>CA (legnaleurc)</span><br/>
+				<span>Wei Cheng Pan (潘韋成)</span><br/>
+			</p>
+			<p class="small">
+				<span>平凡無奇的 115 煙酒生；KDE 用戶，偶而寫些日常使用的小工具</span><br/>
+			</p>
+		</div>
+		<div class="step slide" data-x="2000" data-y="0">
+			<p>
+				<span>Linux 居，大不易</span>
+			</p>
+		</div>
+		<div class="step slide" data-x="2000" data-y="1000">
+			<p class="enhance">
+				<span>我需要有個<span class="enhance">跨平台</span>的 <span class="enhance">GUI</span> 程式，能夠<span class="enhance">切 CUE 檔</span>，並且<span class="enhance">轉換檔案格式</span></span>
+			</p>
+		</div>
+		<div id="random" class="step" data-x="2000" data-y="2000">
+			<strong>Go</strong>
+			<strong>Node.js</strong>
+			<strong>MongoDB</strong>
+			<strong>Ruby on Rails</strong>
+			<strong>Django</strong>
+			<strong>LESS</strong>
+			<strong>Backbone.js</strong>
+			<strong>jQuery</strong>
+			<strong>impress.js</strong>
+			<strong>Twisted</strong>
+			<strong>Twitter Bootstrap</strong>
+			<strong>PhoneGap</strong>
+			<strong>HTML5</strong>
+			<strong>CSS3</strong>
+			<strong>font icons</strong>
+			<strong>Open Data</strong>
+			<strong>NoSQL</strong>
+			<strong>cloud computing</strong>
+		</div>
+		<div class="step slide" data-x="2000" data-y="3000">
+			<a href="http://article.gmane.org/gmane.comp.version-control.git/57918" rel="external">
+				<img src="img/cpp.jpeg" alt="C plus plus -- a horrible language" title="C plus plus -- a horrible language" />
+			</a>
+		</div>
+		<div class="step" data-x="2000" data-y="4000">
+			<div class="arch-group">
+				<div class="column-1">
+					<span>GUI</span>
+				</div>
+				<div class="column-2">
+					<span>Panel<sup>*</sup></span>
+				</div>
+				<div class="column-2">
+					<span>PlayList<sup>*</sup></span>
+				</div>
+				<div class="column-1">
+					<span>Codec</span>
+				</div>
+				<div class="column-2">
+					<span>Reader<sup>*</sup></span>
+				</div>
+				<div class="column-2">
+					<span>Writer<sup>*</sup></span>
+				</div>
+				<div class="column-1">
+					<span>Utitlity</span>
+				</div>
+			</div>
+			<span class="small">* Extensible by plugins</span>
+		</div>
+		<div class="step" data-x="3000" data-y="0">
+<pre class="snipet" data-language="javascript">
+MyPlugin = Plugin.extend( {
+  doInstall: {
+    // register factory
+  },
+  doUninstall: {
+    // cleanup resource
+  },
+} );
+</pre>
+		</div>
+		<div class="step" data-x="4000" data-y="0">
+<pre class="snipet" data-language="javascript">
+Reader.install( function( url ) {
+  // if you can open
+  return 100;
+}, function( url ) {
+  // how to construct
+  return new MyReader( url );
+} );
+// how you open media by factory
+var reader = Reader.create( '...' );
+</pre>
+		</div>
+		<div class="step" data-x="6000" data-y="0">
+			<img src="img/panel.png" alt="convert options" title="convert options" />
+		</div>
+		<div class="step" data-x="6000" data-y="1000">
+<pre class="snipet" data-language="javascript">
+// get encoder by GUI
+var writer = panel.getWriter();
+while( !reader.atEnd() ) {
+  // read frame by seconds
+  var frame = reader.read( sec );
+  writer.write( frame );
+}
+</pre>
+		</div>
+		<div class="step slide" data-x="6000" data-y="2000">
+			<ul>
+				<li>redbook</li>
+				<li>mp3lame</li>
+				<li>xiph</li>
+				<li>ffmpeg</li>
+			</ul>
+		</div>
+		<div class="step" data-x="6000" data-y="3000">
+<pre class="snipet" data-language="javascript">
+// decorate existing decoders
+RangedReader = Reader.extend( {
+  open: function() {
+    this.reader = Reader.create( '...' );
+    this.reader.seek( this.begin );
+  },
+  atEnd: function() {
+    return this.reader.pos() &lt; this.end;
+  },
+} );
+</pre>
+		</div>
+		<div class="step" data-x="6000" data-y="4000">
+<pre class="snipet" data-language="javascript">
+// register this function to PlayList
+function parseCUE( cueFile ) {
+  var tracks = // parse cue by regex
+  var pl = new PlayList();
+  for( (begin, end) in tracks ) {
+    // CueTrack uses RangedReader
+    pl.append( new CueTrack( begin, end ) );
+  }
+  return pl;
+}
+var cue = PlayList.create( '*.cue' );
+var single = PlayList.create( '*.mp3' );
+</pre>
+		</div>
+		<div class="step slide" data-x="7000" data-y="2000">
+			<p>
+				<span>聽說 FFmpeg 支援大部分格式</span>
+			</p>
+		</div>
+		<div class="step slide" data-x="8000" data-y="2000">
+			<img src="img/nodoc.jpg" alt="document is illusion" title="document is illusion" />
+		</div>
+		<div class="step slide" data-x="9000" data-y="2000">
+			<p>
+				<span>Doxygen (e.g.: <a href="http://www.ffmpeg.org/doxygen/1.0/avio_8h.html#03e23bf0144030961c34e803c71f614f" rel="external">avio_seek</a>)</span>
+			</p>
+		</div>
+		<div class="step slide" data-x="10000" data-y="0">
+			<p>
+				<span>gdb 表示：Use the source!</span>
+			</p>
+		</div>
+		<div class="step" data-x="10000" data-y="1000">
+			<p>
+				<ol>
+					<li>container</li>
+					<li>streams (audio, video, subtitle)</li>
+					<li>codec (filter, compress)</li>
+					<li>raw sample (<a href="http://en.wikipedia.org/wiki/PCM" rel="external">PCM</a>)</li>
+				</ol>
+			</p>
+		</div>
+		<div class="step" data-x="10000" data-y="2000">
+			<table class="small">
+				<tr><th>Decode</th><th>Encode</th></tr>
+				<tr><td>avformat_open_input</td><td>avformat_alloc_output_context2</td></tr>
+				<tr><td>avformat_find_stream_info</td><td>avformat_new_stream</td></tr>
+				<tr><td>avcodec_find_decoder</td><td>avcodec_find_encoder</td></tr>
+				<tr><td>avcodec_open2</td><td>avio_open</td></tr>
+				<tr><td>av_read_frame</td><td>avcodec_fill_audio_frame</td></tr>
+				<tr><td>avcodec_decode_audio4</td><td>avcodec_encode_audio2</td></tr>
+				<tr><td>av_samples_copy</td><td>av_interleaved_write_frame</td></tr>
+			</table>
+		</div>
+		<div class="step" data-x="10000" data-y="3000">
+			<ul>
+				<li>AVFormatContext</li>
+				<li>AVStream</li>
+				<li>AVCodecContext</li>
+				<li>AVCodec</li>
+				<li>AVPacket</li>
+				<li>AVFrame</li>
+				<li>(PCM S16 LE)</li>
+			</ul>
+		</div>
+		<div class="step" data-x="10000" data-y="4000">
+			<p>
+				<span>Windows 上的麻煩事</span>
+			</p>
+			<ul>
+				<li>_wfopen_s (char, wchar_t)</li>
+				<li>no debug symbol</li>
+			</ul>
+		</div>
+		<div class="step" data-x="12000" data-y="0">
+			<p>
+				<span>在 2011 年初, FFmpeg <a href="http://ffmpeg.org/pipermail/ffmpeg-devel/2011-January/106403.html" rel="external">分裂</a></span>
+			</p>
+			<div class="av-group">
+				<div class="column-2">
+					<img src="img/ffmpeg.png" alt="FFmpeg" />
+				</div>
+				<div class="column-2">
+					<img src="img/libav.png" alt="Libav" />
+				</div>
+			</div>
+		</div>
+		<div class="step" data-x="12000" data-y="4000">
+			<p>
+				<span>每個 OS, Linux Distro 都有不同的選擇</span>
+			</p>
+			<ul>
+				<li>Debian/Ubuntu - Libav</li>
+				<li>Homebrew - FFmpeg</li>
+				<li>Windows - both but no debug symbol</li>
+			</ul>
+		</div>
+		<div class="step slide" data-x="13000" data-y="1000">
+			<p>
+				<span>族繁不及備載 ... 其他吐槽都在 <a href="http://www.plurk.com/m/s/?query=ffmpeg" rel="external">Plurk</a> 上</span>
+			</p>
+		</div>
+		<div class="step" data-x="13000" data-y="3000">
+			<p>
+				<span>Qt 內建的 Phonon 可以播放聲音</span>
+			</p>
+		</div>
+		<div class="step" data-x="14000" data-y="2000">
+			<ul>
+				<li>DirectShow 9</li>
+				<li>QuickTime 7</li>
+				<li>GStreamer</li>
+				<li>VLC</li>
+				<li>Xine</li>
+			</ul>
+			<p>
+				<span>Phonon：都是 they 的錯</span>
+			</p>
+		</div>
+		<div class="step" data-x="15000" data-y="1000">
+			<p>
+				<span>自已疊 Decorator</span>
+			</p>
+			<ul>
+				<li>Phonon::MediaSource</li>
+				<li>WavWrapper</li>
+				<li>RangedReader</li>
+				<li>FFmpegReader</li>
+			</ul>
+		</div>
+		<div class="step" data-x="15000" data-y="3000">
+			<p>
+				自已包安裝檔
+			</p>
+			<ul>
+				<li>DEB</li>
+				<li>NSIS</li>
+				<li>DragNDrop</li>
+			</ul>
+		</div>
+		<div class="step" data-x="16000" data-y="0">
+			<p>
+				<span>Visual Studio 2008 以前的 dll 有 <a href="http://en.wikipedia.org/wiki/Side-by-side_assembly" rel="external">Side-by-Side information</a></span>
+			</p>
+		</div>
+		<div class="step" data-x="16000" data-y="4000">
+			<p>
+				自已動手做工具是很好玩的
+			</p>
+		</div>
+		<div id="overview" class="step" data-x="8000" data-y="2000" data-scale="17">
 		</div>
 	</div>
 	<div id="barrage">
 	</div>
 	<script src="js/less.min.js" type="text/javascript"></script>
 	<script src="js/impress.js" type="text/javascript"></script>
+	<script src="js/rainbow-custom.min.js" type="text/javascript"></script>
+	<script src="js/socket.io.min.js" type="text/javascript"></script>
 	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<script src="js/effect.js" type="text/javascript"></script>
 </body>

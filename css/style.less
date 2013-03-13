@@ -1,10 +1,5 @@
 @BASE_FONT_SIZE: 72px;
 
-body {
-	background-color: black;
-	color: gray;
-}
-
 .transition( ... ) {
 	-webkit-transition: @arguments;
 	-moz-transition: @arguments;
@@ -53,6 +48,22 @@ body {
 	}
 }
 
+body {
+	background-color: black;
+	color: gray;
+}
+
+a {
+	&:visited {
+		color: blue;
+	}
+
+	/* for IE */
+	img {
+		border-width: 0;
+	}
+}
+
 .impress-not-supported {
 	#impress {
 		display: none;
@@ -67,11 +78,6 @@ body {
 		img {
 			width: 128px;
 			height: 128px;
-		}
-
-		/* for IE */
-		a img {
-			border-width: 0;
 		}
 	}
 }
@@ -118,9 +124,58 @@ body {
 		.scaleFont( 2 );
 	}
 
+	.hidden {
+		display: none;
+	}
+
+	span.enhance {
+		.transform( translateZ( 1em ) scale( 1.1, 1.1 ) );
+
+		display: inline-block;
+		font-weight: bold;
+	}
+
+	.arch-group {
+		@width: 600px;
+
+		.group( @width );
+
+		.column-1 {
+			.group > .column( 1, 2px );
+		}
+		.column-2 {
+			.group > .column( 2, 2px );
+		}
+	}
+
+	.av-group {
+		@width: 800px;
+
+		.group( @width );
+
+		.column-2 {
+			.group > .column( 2, 0 );
+
+			height: 100px;
+			background-color: gray;
+			border-radius: 10px;
+			box-shadow: gray 0px 0px 10px 10px;
+		}
+	}
+
 	.slide {
 		width: 800px;
 		text-align: center;
+	}
+
+	#qrcode {
+		opacity: 0.5;
+	}
+
+	#github-link {
+		opacity: 0.7;
+		position: absolute;
+		right: 0;
 	}
 
 	#title {
@@ -132,6 +187,15 @@ body {
 		}
 	}
 
+	#random {
+		width: 900px;
+
+		strong {
+			display: none;
+			opacity: 0.7;
+		}
+	}
+
 	#barrage {
 		div {
 			position: absolute;
@@ -140,11 +204,20 @@ body {
 			opacity: 0.75;
 			font-size: @BASE_FONT_SIZE;
 			font-weight: bold;
-			white-space: nowrap;
+			white-space: nowrap
+		}
+	}
+}
 
-			&.hidden {
-				display: none;
-			}
+/* for smart phone */
+@media only screen and ( min-device-width: 320px ) and ( max-device-width: 480px ) {
+	#banner {
+		.impress-enabled > .hidden;
+	}
+
+	#barrage {
+		div {
+			.impress-enabled > .small;
 		}
 	}
 }
@@ -154,7 +227,7 @@ body {
 .impress-enabled {
 	pointer-events: none;
 
-	#impress {
+	#impress, #github-link {
 		pointer-events: auto;
 	}
 }

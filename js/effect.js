@@ -1,9 +1,7 @@
 !function() {
 	'use strict';
 
-	/*
-	add css vendor prefix for jQuery
-	*/
+	// add css vendor prefix for jQuery
 	function addCSSVendorPrefix( prop, hook ) {
 		function mangleStyle( prop ) {
 			var supportedProp = null;
@@ -61,7 +59,7 @@
 
 	var slides = document.querySelectorAll( 'div.step' );
 	$( document ).on( 'keyup', function( event ) {
-		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 67 ) {
+		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 66 || event.keyCode === 67 ) {
 			event.preventDefault();
 			switch( event.keyCode ) {
 			case 35:	// End
@@ -69,6 +67,9 @@
 				break;
 			case 36:	// Home
 				api.goto( slides[0] );
+				break;
+			case 66:	// b
+				toggleBanner();
 				break;
 			case 67:	// c
 				toggleComment();
@@ -80,9 +81,67 @@
 	} );
 	// disables default key action
 	$( document ).on( 'keydown', function( event ) {
-		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 67 ) {
+		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 66 || event.keyCode === 67 ) {
 			event.preventDefault();
 		}
+	} );
+
+	function toggleBanner() {
+		$( '#banner' ).toggleClass( 'hidden' );
+	}
+
+	function randomize( target ) {
+		function gr( l, u ) {
+			return Math.floor( Math.random() * ( u - l ) ) + l;
+		}
+		function rc( l ) {
+			var i = gr( 0, l.length );
+			return l[i];
+		}
+		var children = $( target ).children();
+		children.each( function() {
+			var x = gr( -350, 350 );
+			var y = gr( -200, 200 );
+			var z = gr( -400, 400 );
+			var r = gr( -90, 90 );
+			var p = [ 'translateX(', x, 'px) translateY(', y, 'px) translateZ(', z, 'px) rotate(', r, 'deg)' ].join( '' );
+			var c = rc( [ 'gray', 'red', 'green', 'blue' ] );
+			$( this ).css( {
+				transform: p,
+				color: c,
+			} );
+		} );
+
+		var interval = 2000;
+		var i = 0;
+		function run() {
+			if( i >= children.length ) {
+				return false;
+			}
+			var c = $( children[i] );
+			c.css( {
+				position: 'absolute',
+				display: 'inline-block',
+			} );
+			var o = ( c.parent().width() - c.width() ) / 2;
+			c.css( {
+				left: o + 'px',
+			} );
+			++i;
+			interval /= 2;
+			window.setTimeout( run, interval );
+		}
+		run();
+	}
+
+	$( '#random' ).one( 'impress:stepenter', function( event ) {
+		randomize( this );
+	} );
+
+	$( '#overview' ).on( 'impress:stepenter', function( event ) {
+		$( 'div.step' ).addClass( 'enhance' );
+	} ).on( 'impress:stepleave', function( event ) {
+		$( 'div.step' ).removeClass( 'enhance' );
 	} );
 
 	function addComment( comment ) {
@@ -164,4 +223,17 @@
 	window.setInterval( function() {
 		addComment( randomComment() );
 	}, 1000 );
+
+	/*
+	var socket = io.connect( 'http://localhost:3000' );
+	socket.on( 'connect_failed', function() {
+		console.log( 'connect_failed', arguments );
+	} );
+	socket.on( 'error', function() {
+		console.log( 'error', arguments );
+	} );
+	socket.on( 'comment', function( data ) {
+		addComment( data );
+	} );
+	*/
 }();
