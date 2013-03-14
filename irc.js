@@ -39,7 +39,7 @@ var client = new IRC.Client( 'irc.freenode.net', NICK, {
 client.addListener( 'message', function( nick, to, text ) {
 	var pattern = new RegExp( '^' + NICK + '[,:]\\s*(.*)\\s*$' );
 	pattern = text.match( pattern );
-	if( to === CHANNEL && !pattern ) {
+	if( to === CHANNEL && pattern ) {
 		text = pattern[1];
 	} else if( to !== NICK ) {
 		return;
