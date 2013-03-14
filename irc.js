@@ -21,7 +21,7 @@ SOFTWARE.
 */
 var CHANNEL = '#sitcon';
 var NICK = 'comment';
-var PORT = 3000;
+var PORT = 9527;
 
 var IRC = require( 'irc' );
 var SocketIO = require( 'socket.io' );

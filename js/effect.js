@@ -246,7 +246,7 @@ SOFTWARE.
 	}, 1000 );
 
 	/*
-	var socket = io.connect( 'http://localhost:3000' );
+	var socket = io.connect( 'http://localhost:9527/' );
 	socket.on( 'connect_failed', function() {
 		console.log( 'connect_failed', arguments );
 	} );
