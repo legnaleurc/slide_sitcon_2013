@@ -205,11 +205,16 @@ SOFTWARE.
 			} );
 		}
 
-		var ctx = $( '#barrage' );
-		comment = jQuery.parseHTML( comment );
+		try {
+			comment = jQuery.parseHTML( comment );
+		} catch( e ) {
+			console.log( 'invalid comment: ' + e.message );
+			return;
+		}
 		comment = $( comment ).text();
 		comment = jQuery.parseHTML( '<div><span>' + comment + '</span></div>' );
 		comment = $( comment );
+		var ctx = $( '#barrage' );
 		ctx.append( comment );
 		comment.css( {
 			left: window.screen.availWidth,
