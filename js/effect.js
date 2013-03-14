@@ -229,23 +229,6 @@ SOFTWARE.
 	}
 	$( '#barrage' ).data( 'disabled', false );
 
-	function randomComment() {
-		function gr( l, u ) {
-			return Math.floor( Math.random() * ( u - l ) ) + l;
-		}
-
-		var length = gr( 1, 4 );
-		var a = new Array( length );
-		for( var i = 0; i < length; ++i ) {
-			a[i] = '( ´ ▽ ` )ﾉ&nbsp;☆彡';
-		}
-		return a.join( '&nbsp;&nbsp;' );
-	}
-	window.setInterval( function() {
-		addComment( randomComment() );
-	}, 1000 );
-
-	/*
 	var socket = io.connect( 'http://localhost:9527/' );
 	socket.on( 'connect_failed', function() {
 		console.log( 'connect_failed', arguments );
@@ -256,5 +239,4 @@ SOFTWARE.
 	socket.on( 'comment', function( data ) {
 		addComment( data );
 	} );
-	*/
 }();
