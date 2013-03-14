@@ -79,32 +79,41 @@ SOFTWARE.
 	api.init();
 
 	var slides = document.querySelectorAll( 'div.step' );
+
+	var actions = {
+		// End
+		35: function() {
+			api.goto( slides[slides.length-1] );
+		},
+		// Home
+		36: function() {
+			api.goto( slides[0] );
+		},
+		// b
+		66: function() {
+			toggleBanner();
+		},
+		// c
+		67: function() {
+			toggleComment();
+		},
+	};
+
 	$( document ).on( 'keyup', function( event ) {
-		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 66 || event.keyCode === 67 ) {
-			event.preventDefault();
-			switch( event.keyCode ) {
-			case 35:	// End
-				api.goto( slides[slides.length-1] );
-				break;
-			case 36:	// Home
-				api.goto( slides[0] );
-				break;
-			case 66:	// b
-				toggleBanner();
-				break;
-			case 67:	// c
-				toggleComment();
-				break;
-			default:
-				break;
-			}
+		var handler = actions[event.keyCode];
+		if( handler === undefined ) {
+			return;
 		}
+		event.preventDefault();
+		handler();
 	} );
 	// disables default key action
 	$( document ).on( 'keydown', function( event ) {
-		if( event.keyCode === 35 || event.keyCode === 36 || event.keyCode === 66 || event.keyCode === 67 ) {
-			event.preventDefault();
+		var handler = actions[event.keyCode];
+		if( handler === undefined ) {
+			return;
 		}
+		event.preventDefault();
 	} );
 
 	function toggleBanner() {
