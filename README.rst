@@ -1,7 +1,8 @@
 License
 -------
 
-This slide is using MIT and CC BY-SA 3.0 Unported.
+* MIT
+* CC BY-SA 3.0 Unported
 
 Note
 ----
@@ -18,6 +19,8 @@ Borrowed browser icons from `High-res browser logos`_.
 
 Logos of `FFmpeg`_ and `Libav`_ are borrowed from website.
 
+You need `node.js`_ to run *irc.js*.
+
 External Tools
 --------------
 
@@ -25,7 +28,9 @@ External Tools
 * `impress.js`_
 * `jQuery`_
 * `LESS`_
+* `node-irc`_
 * `Rainbow`_
+* `Socket.IO`_
 
 
 .. _FFmpeg: http://www.ffmpeg.org/
@@ -34,4 +39,7 @@ External Tools
 .. _jQuery: http://jquery.com/
 .. _LESS: http://lesscss.org/
 .. _Libav: http://libav.org/
+.. _node-irc: https://github.com/martynsmith/node-irc
+.. _node.js: http://nodejs.org/
 .. _Rainbow: http://craig.is/making/rainbows
+.. _Socket.IO: http://socket.io/
